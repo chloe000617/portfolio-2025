@@ -1,8 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 import { PAGE_DATA } from "../data";
 
-// Initialize the client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Lazy initialization to prevent app crash on load if env vars are missing
+let ai: GoogleGenAI | null = null;
 
 const SYSTEM_INSTRUCTION = `
 You are an AI assistant for Chloe Li (李品逸), an AI Product Strategist and Product Manager.
@@ -29,6 +29,11 @@ ${PAGE_DATA.projects.map(p => `- ${p.title} (${p.category}): ${p.summary}`).join
 
 export async function getChatResponse(history: { role: string; text: string }[]) {
   try {
+    if (!ai) {
+      // Initialize only when called
+      ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    }
+
     const chat = ai.chats.create({
       model: 'gemini-2.5-flash',
       config: {
