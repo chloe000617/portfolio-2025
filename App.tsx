@@ -1,19 +1,19 @@
 // App.tsx
 import Navbar from './components/Navbar';
-import HomeSection from './components/HomeSection'; // 記得這個也要有
-import AboutSection from './components/AboutSection'; // 新生成的
-import ProjectsSection from './components/ProjectsSection'; // 新生成的
-import ContactSection from './components/ContactSection'; // 新生成的
+import HomeSection from './components/HomeSection';
+import AboutSection from './components/AboutSection';
+import ProjectsSection from './components/ProjectsSection';
+import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <div className="...">
+    <div className="min-h-screen bg-slate-950 text-white selection:bg-cyan-500/30">
       <Navbar />
       <main>
         <HomeSection />
-        <AboutSection />
         <ProjectsSection />
+        <AboutSection />
         <ContactSection />
       </main>
       <Footer />
